@@ -1,8 +1,12 @@
+-- Drop existing tables with all dependencies
+DROP TABLE IF EXISTS game_players CASCADE;
+DROP TABLE IF EXISTS games CASCADE;
+
 -- Create games table
 CREATE TABLE games (
     id SERIAL PRIMARY KEY,
     current_turn INTEGER DEFAULT 0,
-    winner_id UUID REFERENCES auth.users(id),
+    winner_id UUID,
     is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
@@ -11,7 +15,7 @@ CREATE TABLE games (
 CREATE TABLE game_players (
     id SERIAL PRIMARY KEY,
     game_id INTEGER REFERENCES games(id) ON DELETE CASCADE,
-    user_id UUID REFERENCES auth.users(id),
+    user_id UUID,
     position INTEGER DEFAULT 0,
     player_order INTEGER NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
