@@ -1,0 +1,27 @@
+.game-status {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+  margin: 20px auto;
+  text-align: center;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+}
+
+.game-status p {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .game-status {
+    max-width: 90vw;
+  }
+
+  .game-status p {
+    font-size: 1rem;
+  }
+}
