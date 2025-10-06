@@ -1,8 +1,8 @@
-# 🐍 Snakes and Ladders Game
+# Snakes and Ladders Game
 
 A modern, interactive Snakes and Ladders game built with React and Vite.
 
-## 🎮 Features
+## Features
 
 - **Two-player gameplay** with alternating turns
 - **Interactive dice rolling** with animation
@@ -13,7 +13,7 @@ A modern, interactive Snakes and Ladders game built with React and Vite.
 - **Winner celebration** with modal popup
 - **Reset functionality** to start new games
 
-## 🎯 Game Rules
+## Game Rules
 
 - Players take turns rolling the dice
 - Move your token according to the dice roll
@@ -22,7 +22,7 @@ A modern, interactive Snakes and Ladders game built with React and Vite.
 - Rolling a 6 gives you an extra turn
 - First player to reach cell 100 wins!
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js (v14 or higher)
@@ -48,7 +48,7 @@ npm run dev
 
 4. Open your browser and navigate to `http://localhost:5173`
 
-## 🎨 Game Elements
+## Game Elements
 
 ### Snakes Positions
 - 16 → 6, 47 → 26, 49 → 11, 56 → 53, 62 → 19
@@ -58,21 +58,20 @@ npm run dev
 - 1 → 38, 4 → 14, 9 → 21, 28 → 84, 36 → 44
 - 51 → 67, 71 → 91, 80 → 100
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **React** - Frontend framework
 - **Vite** - Build tool and dev server
 - **CSS** - Styling and animations
-- **SVG** - Custom snake and ladder graphics
 
-## 📱 Responsive Design
+## Responsive Design
 
 The game is fully responsive and works on:
 - Desktop computers
 - Tablets
 - Mobile phones
 
-## 🎯 How to Play
+## How to Play
 
 1. Click "Roll Dice" to start your turn
 2. Your token moves automatically based on the dice roll
@@ -80,7 +79,7 @@ The game is fully responsive and works on:
 4. Land on a snake head to slide down
 5. First to reach cell 100 wins!
 
-## 🔧 Development
+## Development
 
 ### Available Scripts
 
@@ -103,7 +102,7 @@ src/
 └── App.jsx              # Main app component
 ```
 
-## 🎨 Customization
+## Customization
 
 You can easily customize:
 - Snake and ladder positions in `App.jsx`
@@ -111,16 +110,6 @@ You can easily customize:
 - Player token colors
 - Game messages and emojis
 
-## 📄 License
-
-This project is open source and available under the MIT License.
-
-## 👥 Contributors
-
-- Michelle Kamau - Board UI
-- Ignatius Waweru - Board Logic
-- Erick Njiru - State and  Data Management,Track Player Stats
-
 ---
 
-Enjoy playing Snakes and Ladders! 🎲🎉
+Enjoy playing Snakes and Ladders! 
