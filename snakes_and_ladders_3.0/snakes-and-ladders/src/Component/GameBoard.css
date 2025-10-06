@@ -1,0 +1,44 @@
+.game-board {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.board-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+
+.player-token {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  transition: all 0.5s ease;
+  z-index: 10;
+}
+
+@media (max-width: 600px) {
+  .game-board {
+    max-width: 90vw;
+  }
+  
+  .player-token {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  .player-token {
+    width: 12px;
+    height: 12px;
+  }
+}
