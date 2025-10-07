@@ -1,10 +1,10 @@
 # Snakes and Ladders Game
 
-A modern, interactive Snakes and Ladders game built with React and Vite.
+A modern, full-stack Snakes and Ladders game with a React frontend and Flask backend API.
 
 ## Features
 
-- **Two-player gameplay** with alternating turns
+### Frontend (React)
 - **Interactive dice rolling** with animation
 - **Visual snakes and ladders** that extend to their destinations
 - **Colorful board** with alternating yellow and green cells
@@ -12,6 +12,14 @@ A modern, interactive Snakes and Ladders game built with React and Vite.
 - **Game status updates** with emoji feedback
 - **Winner celebration** with modal popup
 - **Reset functionality** to start new games
+
+### Backend (Flask API)
+- **User authentication** with JWT tokens
+- **User registration and login**
+- **Game state management**
+- **Multiplayer support**
+- **Database persistence** with SQLAlchemy
+- **RESTful API endpoints**
 
 ## Game Rules
 
@@ -30,6 +38,7 @@ A modern, interactive Snakes and Ladders game built with React and Vite.
 
 ### Installation
 
+#### Frontend Setup
 1. Clone the repository:
 ```bash
 git clone https://github.com/blankops-000/phase-2-snakes-n-laders.git
@@ -48,6 +57,30 @@ npm run dev
 
 4. Open your browser and navigate to `http://localhost:5173`
 
+#### Backend Setup
+1. Navigate to the Flask project directory:
+```bash
+cd ../flask_project
+```
+
+2. Create a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. Install Python dependencies:
+```bash
+pip install flask flask-cors flask-migrate flask-jwt-extended flask-sqlalchemy werkzeug
+```
+
+4. Start the Flask server:
+```bash
+python app.py
+```
+
+5. The API will be available at `http://localhost:5001`
+
 ## Game Elements
 
 ### Snakes Positions
@@ -60,9 +93,17 @@ npm run dev
 
 ## Technologies Used
 
+### Frontend
 - **React** - Frontend framework
 - **Vite** - Build tool and dev server
 - **CSS** - Styling and animations
+
+### Backend
+- **Flask** - Python web framework
+- **SQLAlchemy** - Database ORM
+- **Flask-JWT-Extended** - JWT authentication
+- **Flask-CORS** - Cross-origin resource sharing
+- **Flask-Migrate** - Database migrations
 
 ## Responsive Design
 
@@ -90,17 +131,35 @@ The game is fully responsive and works on:
 ### Project Structure
 
 ```
-src/
-├── Component/
-│   ├── GameBoard.jsx     # Main game board
-│   ├── DiceRoller.jsx    # Dice rolling component
-│   ├── GameStatus.jsx    # Game status display
-│   └── *.css            # Component styles
-├── assets/
-│   ├── snake-straight.svg
-│   └── ladder-transparent.svg
-└── App.jsx              # Main app component
+snakes_and_ladders_3.0/
+├── snakes-and-ladders/          # React Frontend
+│   ├── src/
+│   │   ├── Component/
+│   │   │   ├── GameBoard.jsx    # Main game board
+│   │   │   ├── DiceRoller.jsx   # Dice rolling component
+│   │   │   ├── GameStatus.jsx   # Game status display
+│   │   │   └── *.css           # Component styles
+│   │   ├── assets/
+│   │   │   ├── snake-straight.svg
+│   │   │   └── ladder-transparent.svg
+│   │   └── App.jsx             # Main app component
+│   └── package.json
+└── flask_project/              # Flask Backend
+    ├── app.py                  # Main Flask application
+    ├── models.py               # Database models
+    ├── config.py               # Configuration settings
+    └── requirements.txt        # Python dependencies
 ```
+
+## API Endpoints
+
+- `GET /` - API status and available endpoints
+- `POST /register` - User registration
+- `POST /login` - User authentication
+- `GET /my-game` - Get user's active game
+- `POST /start-game` - Start a new game
+- `POST /roll-dice` - Roll dice and move player
+- `GET /game-state/<game_id>` - Get current game state
 
 ## Customization
 
@@ -109,6 +168,13 @@ You can easily customize:
 - Board colors in `GameBoard.css`
 - Player token colors
 - Game messages and emojis
+
+## Contributors
+
+- **Ignatius** - Backend Development
+- **Tiara** - Frontend Development
+- **Michelle** - UI/UX Design
+- **Erick** - Full-stack Development
 
 ---
 
