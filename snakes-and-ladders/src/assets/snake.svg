@@ -1,0 +1,25 @@
+<svg width="150" height="150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Snake body - curved downward -->
+  <path d="M75 20 Q40 40 60 70 Q80 90 50 110 Q30 130 75 130" 
+        stroke="#228B22" stroke-width="15" fill="none" stroke-linecap="round"/>
+  
+  <!-- Snake segments -->
+  <circle cx="75" cy="25" r="8" fill="#32CD32" stroke="#228B22" stroke-width="2"/>
+  <circle cx="55" cy="45" r="7" fill="#32CD32" stroke="#228B22" stroke-width="2"/>
+  <circle cx="70" cy="65" r="7" fill="#32CD32" stroke="#228B22" stroke-width="2"/>
+  <circle cx="55" cy="85" r="7" fill="#32CD32" stroke="#228B22" stroke-width="2"/>
+  <circle cx="65" cy="105" r="7" fill="#32CD32" stroke="#228B22" stroke-width="2"/>
+  
+  <!-- Snake head at top -->
+  <circle cx="75" cy="20" r="12" fill="#32CD32" stroke="#228B22" stroke-width="2"/>
+  
+  <!-- Eyes -->
+  <circle cx="70" cy="16" r="2" fill="black"/>
+  <circle cx="80" cy="16" r="2" fill="black"/>
+  
+  <!-- Tongue -->
+  <path d="M75 12 L72 8 M75 12 L78 8" stroke="red" stroke-width="2"/>
+  
+  <!-- Tail at bottom -->
+  <circle cx="75" cy="130" r="6" fill="#228B22"/>
+</svg>
