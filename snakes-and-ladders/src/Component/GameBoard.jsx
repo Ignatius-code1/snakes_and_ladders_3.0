@@ -30,7 +30,7 @@ const GameBoard = ({ playersPositions, snakes, ladders, currentPlayer }) => {
             ...getPositionStyle(playersPositions[playerId]),
             backgroundColor: playerId === 'player1' ? '#FF6B6B' : '#4ECDC4'
           }}
-          title={`Player ${playerId.slice(-1)}${playerId === `player${currentPlayer}` ? ' (current)' : ''}`}
+          title={`${playerId === 'player1' ? 'You' : 'Luna'}${(playerId === 'player1' && currentPlayer === 1) || (playerId === 'luna' && currentPlayer === 2) ? ' (current)' : ''}`}
         ></div>
       ))}
     </div>

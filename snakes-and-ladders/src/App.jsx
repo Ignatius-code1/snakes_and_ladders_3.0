@@ -34,38 +34,45 @@ const App = () => {
     87: 94,
   };
 
-  const [positions, setPositions] = useState({ player1: 1, player2: 1 });
+  const [positions, setPositions] = useState({ player1: 1, luna: 1 });
   const [currentPlayer, setCurrentPlayer] = useState(1);
   const [gameMessage, setGameMessage] = useState("");
   const [winner, setWinner] = useState(null);
   const [rolling, setRolling] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
+  const [moveComments, setMoveComments] = useState([]);
 
-  const handleDiceRoll = (roll) => {
-    if (winner || rolling) return;
-    setRolling(true);
-
-    const playerKey = `player${currentPlayer}`;
+  const makeMove = (player, roll) => {
+    const playerKey = player === 1 ? 'player1' : 'luna';
+    const playerName = player === 1 ? 'You' : 'Luna';
     let newPosition = positions[playerKey] + roll;
+    let comment = `${playerName} rolled ${roll}!`;
 
     if (newPosition > BOARD_SIZE) {
-      setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
-      setRolling(false);
-      return;
+      comment += ` Can't move past 100.`;
+      addComment(comment);
+      return false;
     }
 
     if (newPosition === BOARD_SIZE) {
       setPositions((prev) => ({ ...prev, [playerKey]: newPosition }));
-      setWinner(currentPlayer);
-      setGameMessage(`🎉 Player ${currentPlayer} wins! 🏆`);
-      setRolling(false);
-      return;
+      setWinner(player);
+      comment += ` Reached 100 and wins! `;
+      setGameMessage(` ${playerName} wins! `);
+      addComment(comment);
+      return true;
     }
 
     if (ladders[newPosition]) {
-      newPosition = ladders[newPosition];
+      const ladderEnd = ladders[newPosition];
+      newPosition = ladderEnd;
+      comment += ` Climbed ladder to ${ladderEnd}! 🪜`;
     } else if (snakes[newPosition]) {
-      newPosition = snakes[newPosition];
+      const snakeEnd = snakes[newPosition];
+      newPosition = snakeEnd;
+      comment += ` Hit snake, slid down to ${snakeEnd}! `;
+    } else {
+      comment += ` Moved to ${newPosition}.`;
     }
 
     setPositions((prev) => ({
@@ -73,18 +80,50 @@ const App = () => {
       [playerKey]: newPosition
     }));
 
-    if (roll !== 6) {
-      setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
-    }
-    setRolling(false);
+    addComment(comment);
+    return roll === 6;
+  };
+
+  const addComment = (comment) => {
+    setMoveComments(prev => [comment, ...prev.slice(0, 4)]);
+  };
+
+  const handleDiceRoll = (roll) => {
+    if (winner || rolling) return;
+    setRolling(true);
+
+    const keepTurn = makeMove(currentPlayer, roll);
+    
+    setTimeout(() => {
+      if (!keepTurn && !winner) {
+        setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
+        
+        // Luna's turn
+        if (currentPlayer === 1) {
+          setTimeout(() => {
+            const lunaRoll = Math.floor(Math.random() * 6) + 1;
+            const lunaKeepTurn = makeMove(2, lunaRoll);
+            if (!lunaKeepTurn && !winner) {
+              setCurrentPlayer(1);
+            }
+            setRolling(false);
+          }, 1500);
+        } else {
+          setRolling(false);
+        }
+      } else {
+        setRolling(false);
+      }
+    }, 500);
   };
 
   const resetGame = () => {
-    setPositions({ player1: 1, player2: 1 });
+    setPositions({ player1: 1, luna: 1 });
     setCurrentPlayer(1);
     setGameMessage("");
     setWinner(null);
     setRolling(false);
+    setMoveComments([]);
   };
 
   const startGame = () => {
@@ -143,7 +182,7 @@ const App = () => {
                 style={{ backgroundColor: winner === 1 ? '#FF6B6B' : '#4ECDC4' }}
                 aria-hidden="true"
               ></div>
-              <h3>Player {winner} Wins!</h3>
+              <h3>{winner === 1 ? 'You Win!' : 'Luna Wins!'}</h3>
             </div>
             <button
               className="play-again-button"
@@ -156,9 +195,29 @@ const App = () => {
         </div>
       )}
       
-      <div className="legend" aria-label="Game legend">
-        <div><span className="legend-snake"></span> Snake</div>
-        <div><span className="legend-ladder"></span> Ladder</div>
+      <div className="game-info">
+        <div className="players-info">
+          <div className="player-info">
+            <span className="player-token" style={{backgroundColor: '#FF6B6B'}}></span>
+            <span>You (Position: {positions.player1})</span>
+          </div>
+          <div className="player-info">
+            <span className="player-token" style={{backgroundColor: '#4ECDC4'}}></span>
+            <span>Luna (Position: {positions.luna})</span>
+          </div>
+        </div>
+        
+        <div className="move-comments">
+          <h3>Recent Moves:</h3>
+          {moveComments.map((comment, index) => (
+            <div key={index} className="comment">{comment}</div>
+          ))}
+        </div>
+        
+        <div className="legend" aria-label="Game legend">
+          <div><span className="legend-snake"></span> Snake</div>
+          <div><span className="legend-ladder"></span> Ladder</div>
+        </div>
       </div>
 
     </div>
