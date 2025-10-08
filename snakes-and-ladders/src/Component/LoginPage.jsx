@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import './LoginPage.css';
 
 const LoginPage = ({ onStartGame }) => {
-  // User type storage using usestate
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Login function for the user/player to the game
   function handleLogin() {
     if (!username || !password) {
       alert('Please enter username and password');
@@ -16,44 +14,30 @@ const LoginPage = ({ onStartGame }) => {
 
     setLoading(true);
     
-    // The front end sends a POST request to the backend Flask server to get the token 
-    // for authentication of username and password
-    fetch('https://https://snakes-and-ladders-3-0.onrender.com/login', {
+    fetch('https://snakes-and-ladders-3-0.onrender.com/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' }, 
-      // this tells the server to expect json data for flask to process
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
-      // this makes the data shared to the server to bcm a json format
     })
-    .then(response => {
-      // Get both response and data together
-      return response.json().then(data => ({ response, data }));
-    })
+    .then(response => response.json().then(data => ({ response, data })))
     .then(({ response, data }) => {
-      // checks if response was successful to allow login by user/player
       if (response.ok) {
-        // this saves token gotten for user/player for later use
-        // This is also where the JWT is received and stored.
-        localStorage.setItem('token', data.access_token);  
+        localStorage.setItem('token', data.access_token);
         localStorage.setItem('username', data.username);
         alert('Login successful!');
-        
         onStartGame();
       } else {
         alert('Login failed: ' + data.error);
       }
     })
     .catch(error => {
-      // helps handle network errors
       alert('Error: Cannot connect to server');
     })
     .finally(() => {
-      // stops loading, whether success or error
       setLoading(false);
     });
   }
 
-  // Create new account function for the user/player 
   function handleRegister() {
     if (!username || !password) {
       alert('Please enter username and password');
@@ -62,18 +46,13 @@ const LoginPage = ({ onStartGame }) => {
 
     setLoading(true);
     
-    // Flask server creates or stores new account
-    fetch('https://YOUR-RENDER-URL.onrender.com/register', {
+    fetch('https://snakes-and-ladders-3-0.onrender.com/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
     })
-    .then(response => {
-      // Get both response and data together
-      return response.json().then(data => ({ response, data }));
-    })
+    .then(response => response.json().then(data => ({ response, data })))
     .then(({ response, data }) => {
-      // Checks if registration was successful
       if (response.ok) {
         alert('Account created! Now you can login.');
       } else {
@@ -81,11 +60,9 @@ const LoginPage = ({ onStartGame }) => {
       }
     })
     .catch(error => {
-      // helps to andle network errors
       alert('Error: Cannot connect to server');
     })
     .finally(() => {
-      // this stops the loading, whether success or error
       setLoading(false);
     });
   }
@@ -104,7 +81,7 @@ const LoginPage = ({ onStartGame }) => {
             placeholder="Enter your username" 
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            //onchange helps to update the state as user types in the username
+
           />
           
           <input
@@ -112,7 +89,7 @@ const LoginPage = ({ onStartGame }) => {
             placeholder="Enter your password" 
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            //onchange helps to update the state as user types in the password
+
           />
           
           <button onClick={handleLogin} disabled={loading}>
