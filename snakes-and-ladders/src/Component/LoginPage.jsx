@@ -18,7 +18,7 @@ const LoginPage = ({ onStartGame }) => {
     
     // The front end sends a POST request to the backend Flask server to get the token 
     // for authentication of username and password
-    fetch('https://YOUR-RENDER-URL.onrender.com/login', {
+    fetch('https://https://snakes-and-ladders-3-0.onrender.com/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }, 
       // this tells the server to expect json data for flask to process
