@@ -18,7 +18,7 @@ const LoginPage = ({ onStartGame }) => {
     
     // The front end sends a POST request to the backend Flask server to get the token 
     // for authentication of username and password
-    fetch('http://localhost:5001/login', {
+    fetch('https://YOUR-RENDER-URL.onrender.com/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }, 
       // this tells the server to expect json data for flask to process
@@ -63,7 +63,7 @@ const LoginPage = ({ onStartGame }) => {
     setLoading(true);
     
     // Flask server creates or stores new account
-    fetch('http://localhost:5001/register', {
+    fetch('https://YOUR-RENDER-URL.onrender.com/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
